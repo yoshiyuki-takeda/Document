@@ -121,4 +121,4 @@ elfファイルとhexファイルの中身を比較するため、elfファイ�
 
 <br><br><br>
 以上。  
-<br><br><br><br><div style="text-align: right;">　 　 　 　著　竹田良之</div>
+<br><br><br><br><div style="text-align: right;">　 　 　 　著　Yoshiyuki Takeda</div>
