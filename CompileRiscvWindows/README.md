@@ -45,7 +45,9 @@ Windows版のLatticeのPropel、GowinのGMDなどがインストールされて�
 そちらを使用するのも良いでしょう。
 
 <br>
+
 ----------
+
 <br>
 
 ### ・コンパイル  
