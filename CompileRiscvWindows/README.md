@@ -115,8 +115,8 @@ elfファイルとhexファイルの中身を比較するため、elfファイ�
 ##### > riscv64-unknown-elf-objdump -d `test.elf` > `test.dump`
 　elfファイルとhexファイルを比較すると、hexファイルでは、elfファイルからセクション、アドレス情報がなくなり、機械語のオペランドが並べられた状態になります。  
 <br>
-![コマンドプロンプト](./hexfile.jpg)
+![ｈｅｘファイル](./hexfile.jpg)
 
 <br><br><br>
 以上。  
-<br><br><br><br><div style="text-align: right;">著　竹田良之</div>
+<br><br><br><br><div style="text-align: right;">　 　 　 　著　竹田良之</div>
