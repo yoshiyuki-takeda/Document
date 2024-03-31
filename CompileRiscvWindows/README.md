@@ -14,9 +14,9 @@
 RISC-VのWindowsのコンパイラは、SiFiveのGithubのリポジトリから入手可能です。  
 　[freedom-toolsリポジトリ](https://github.com/sifive/freedom-tools)
 の[リリース情報](https://github.com/sifive/freedom-tools/releases)
-にApple、Linux、Windowsの各OS用にビルドされたツール群がアップロードされています。  
-　末尾が「-w64-mingw32.zip」のファイルが、Windows用のファイルになります。  
+にApple、Linux、Windowsの各OS用にビルドされたツール群がアップロードされています。末尾が「-w64-mingw32.zip」のファイルが、Windows用のファイルになります。  
 　「riscv64-unknown-elf-toolchain」にコンパイラ、アセンブラ、リンカなどメインのツールがあり、「sdk-utilities」にfreedom-bin2hexがあり、FPGA用のhexファイルの生成に必要です。  
+　最新のコンパイラは、[The xPack Project](https://xpack.github.io/)からダウンロードできます。
   
 ![ツール所在](./freedom-tools.jpg)
 
@@ -43,6 +43,18 @@ PCを再起動するとパスが有効になります。
 などが、自社製のFPGAに搭載するRISC-Vソフトコアの開発環境用にコンパイラが付属しているので、
 Windows版のLatticeのPropel、GowinのGMDなどがインストールされているPCであれば、既に、RISC-Vのコンパイル環境がPCに存在してます。
 そちらを使用するのも良いでしょう。
+<br>
+　[The xPack Project](https://xpack.github.io/)からコンパイラをダウンロードする方法を紹介します。  
+　xPackのホームページの中から**the xPack RISC-V Embedded GCC toolchain**へのリンクをたどり、  
+![xPack1](./xPack.jpg)<br>
+
+　メニューの**Releases**から、お好みのバージョンの*download*をクリックします。  
+![xPack2](./xPack2.jpg)<br>
+
+　バイナリ一覧の**xpack-riscv-none-elf-gcc-xxxxxxx-win32-x64.zip**（xxxxxxxにバージョン番号になります）が、Windows用のバイナリになります。  
+![xPack2](./xPack3.jpg)<br>
+
+　xPackとSifiveのバイナリで、コマンド名が若干異なるので注意してください。
 
 <br>
 
@@ -79,6 +91,10 @@ test.cとStart.Sをコンパイルするコマンドは以下の通りになり�
 ##### > riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -c -o `test.o` `test.c`
 ##### > riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -c -o `start.o` `start.S`
 <br>
+
+(xPack)　*> riscv-none-elf-gcc -march=rv32i -mabi=ilp32 -c -o `test.o` `test.c`*<br>
+(xPack)　*> riscv-none-elf-gcc -march=rv32i -mabi=ilp32 -c -o `start.o` `start.S`*<br>
+
 アセンブリ言語、C言語のファイル共に「riscv64-unknown-elf-gcc」コマンドでコンパイルします。  
 コンパイルの対象とするCPUのビット幅と使用するRISC-Vの拡張命令を下記の表に記します。<br><br>
 
@@ -97,6 +113,7 @@ test.cとStart.Sをコンパイルするコマンドは以下の通りになり�
 　コンパイルが完了したら、リンクを行い、elfの作成します。32ビットのRISC-Vのリンクのコマンドは、以下の様になります。
 
 ##### > riscv64-unknown-elf-ld `test.o` `start.o` -T`link.ld` -static -m elf32lriscv -b elf32-littleriscv -o `test.elf`
+(xPack)　*> riscv-none-elf-ld `test.o` `start.o` -T`link.ld` -static -m elf32lriscv -b elf32-littleriscv -o `test.elf`*<br><br>
 　64ビットのリンクをする場合は、「elf64lriscv」、「elf64-littleriscv」として下さい。
 <br><br><br>
 
@@ -105,6 +122,7 @@ test.cとStart.Sをコンパイルするコマンドは以下の通りになり�
 　ここでは、elfファイルからbinファイル、binファイルからhexファイルに変換する2段階でコンバートする方法を紹介します。  
 　elfファイルからbinファイルへのコンバートは下のコマンドを使います。
 ##### > riscv64-unknown-elf-objcopy -O binary `test.elf` `test.bin`
+(xPack)　*> riscv-none-elf-objcopy -O binary `test.elf` `test.bin`*<br><br>
 続いて、binファイルからhexファイルに変換します。
 ##### > freedom-bin2hex -w 32 -i `test.bin` -o `test.hex`
 ここで作ったhexファイルを、verilogの$readmemhを使用すれば、FPGAのメモリモジュールに読み込むことができます。  
@@ -115,6 +133,7 @@ test.cとStart.Sをコンパイルするコマンドは以下の通りになり�
 実際に出来たhexファイルを見てみます。  
 elfファイルとhexファイルの中身を比較するため、elfファイルをダンプします。
 ##### > riscv64-unknown-elf-objdump -d `test.elf` > `test.dump`
+(xPack)　*> riscv-none-elf-objdump -d `test.elf` > `test.dump`*<br><br>
 　elfファイルとhexファイルを比較すると、hexファイルでは、elfファイルからセクション、アドレス情報がなくなり、機械語のオペランドが並べられた状態になります。  
 <br>
 ![ｈｅｘファイル](./hexfile.jpg)
