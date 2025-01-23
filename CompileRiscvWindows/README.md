@@ -94,6 +94,8 @@ test.cとStart.Sをコンパイルするコマンドは以下の通りになり�
 
 (xPack)　*> riscv-none-elf-gcc -march=rv32i -mabi=ilp32 -c -o `test.o` `test.c`*<br>
 (xPack)　*> riscv-none-elf-gcc -march=rv32i -mabi=ilp32 -c -o `start.o` `start.S`*<br>
+割り込みなどでCSRレジスタを使用する場合(xpack v14以降)<br>
+(xPack)　*> riscv-none-elf-gcc -march=rv32i_zicsr -mabi=ilp32 -c -o `test.o` `test.c`*<br>
 
 アセンブリ言語、C言語のファイル共に「riscv64-unknown-elf-gcc」コマンドでコンパイルします。  
 コンパイルの対象とするCPUのビット幅と使用するRISC-Vの拡張命令を下記の表に記します。<br><br>
