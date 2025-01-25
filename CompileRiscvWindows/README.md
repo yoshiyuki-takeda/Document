@@ -128,7 +128,7 @@ test.cとStart.Sをコンパイルするコマンドは以下の通りになり�
 続いて、binファイルからhexファイルに変換します。
 ##### > freedom-bin2hex -w 32 -i `test.bin` -o `test.hex`
 ここで作ったhexファイルを、verilogの$readmemhを使用すれば、FPGAのメモリモジュールに読み込むことができます。  
-ただし、Quartus Prime(Modelsim-Altera)では、これで作ったhexは使用できません。出来上がったhexファイルのテキスト形式をWindows(CRLF)からUnix(LF)へ修正する必要があります。  
+ただし、Modelsim-Alteraでは、これで作ったhexは使用できません。出来上がったhexファイルのテキスト形式をWindows(CRLF)からUnix(LF)へ修正する必要があります。  
 参考までにコマンドプロンプトは以下の様になります。  
 ![コマンドプロンプト](./prompt.jpg)
 　  
